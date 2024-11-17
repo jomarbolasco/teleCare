@@ -1,69 +1,55 @@
 <script setup>
-import { ref } from 'vue'
+import AppLayout from '@/components/layout/AppLayout.vue'
 
-const theme = ref('light')
+import { useDisplay } from 'vuetify'
 
-function onClick() {
-  theme.value = theme.value === 'light' ? 'dark' : 'light'
-}
+const { mobile } = useDisplay()
 </script>
 
 <template>
-  <v-responsive class="border rounded">
-    <v-app :theme="theme">
-      <v-app-bar class="px-3">
-        <v-spacer></v-spacer>
+  <AppLayout>
+    <template #content>
+      <v-row>
+        <v-col cols="12" md="6" class="mx-auto">
+          <v-card class="mx-auto" elevation="24">
+            <v-card-title>
+              <v-img
+                class="mx-auto"
+                src="/public/images/telecare logo.png"
+                :width="mobile ? '75%' : '25%'"
+              ></v-img>
+              <h2>teleCARE</h2>
+              <p>Please Sign-up</p>
+            </v-card-title>
 
-        <v-btn
-          :prepend-icon="theme === 'light' ? 'mdi-weather-sunny' : 'mdi-weather-night'"
-          text="Toggle Theme"
-          slim
-          @click="onClick"
-        ></v-btn>
-      </v-app-bar>
+            <v-card-text class="bg-surface-light pt-4">
+              <v-form fast-fail @submit.prevent>
+                <v-text-field label="First name" variant="outlined"></v-text-field>
 
-      <v-main>
-        <v-container>
-          <v-row>
-            <v-col cols="12" md="6" class="mx-auto">
-              <v-card class="mx-auto" prepend-icon="mdi-account" subtitle="Life makes more easier">
-                <template v-slot:title>
-                  <span class="font-weight-black">Welcome to teleCARE</span>
-                </template>
+                <v-text-field label="Last name" variant="outlined"></v-text-field>
 
-                <v-card-text class="bg-surface-light pt-4">
-                  <v-form fast-fail @submit.prevent>
-                    <v-text-field label="First name" variant="outlined"></v-text-field>
+                <v-text-field label="Email" variant="outlined"></v-text-field>
 
-                    <v-text-field label="Last name" variant="outlined"></v-text-field>
+                <v-text-field label="Password" type="password" variant="outlined"></v-text-field>
 
-                    <v-text-field label="Email" variant="outlined"></v-text-field>
+                <v-text-field
+                  label="Password Confirmation"
+                  type="password"
+                  variant="outlined"
+                ></v-text-field>
 
-                    <v-text-field
-                      label="Password"
-                      type="password"
-                      variant="outlined"
-                    ></v-text-field>
-
-                    <v-text-field
-                      label="Password Confirmation"
-                      type="password"
-                      variant="outlined"
-                    ></v-text-field>
-
-                    <v-btn class="mt-2" type="submit" block>Submit</v-btn>
-                  </v-form>
-                  <v-divider class="my-5"></v-divider>
-                  <h5 class="text-center">
-                    Already have an account? <RouterLink to="/login"> Login</RouterLink>
-                  </h5></v-card-text
+                <v-btn class="mt-2" type="submit" block prepend-icon="mdi-account-plus"
+                  >Register</v-btn
                 >
-              </v-card>
-            </v-col>
-          </v-row>
-        </v-container>
-      </v-main>
-      <v-footer border app>2024 - teleCARE</v-footer>
-    </v-app>
-  </v-responsive>
+              </v-form>
+              <v-divider class="my-5"></v-divider>
+              <h5 class="text-center">
+                Already have an account? <RouterLink to="/login"> Login</RouterLink>
+              </h5></v-card-text
+            >
+          </v-card>
+        </v-col>
+      </v-row>
+    </template>
+  </AppLayout>
 </template>
